@@ -1,0 +1,4 @@
+interface:
+  display_name: "Character Studio"
+  short_description: "Design low-poly 3D characters with Blender"
+  default_prompt: "Use $character-studio to design and build a stylized low-poly 3D character in Blender."

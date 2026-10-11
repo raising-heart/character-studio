@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+node_modules/
+.env
+.env.*
+.DS_Store
+Thumbs.db
+*.blend
+*.blend1
+*.blend2
+*.glb
+*.gltf
+work/
+outputs/

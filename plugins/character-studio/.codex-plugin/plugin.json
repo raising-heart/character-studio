@@ -1,0 +1,17 @@
+{
+  "name": "character-studio",
+  "version": "0.2.0",
+  "description": "Design, animate, and export stylized Blender characters with character effects and browser VFX workflows.",
+  "author": {"name": "Personal Codex customization"},
+  "license": "MIT",
+  "keywords": ["blender", "characters", "low-poly", "rigging", "gltf", "effects", "particles", "threejs"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Character Studio",
+    "shortDescription": "Create stylized low-poly characters in Blender",
+    "longDescription": "A personal character-design workflow inspired by Game Studio: build and animate Blender characters, validate GLB assets, and add sparks, stylized smoke/fire, auras, and trails. Includes Blender effect previews, a bounded Three.js effects starter, and animation cue helpers.",
+    "developerName": "Personal Codex customization",
+    "category": "Developer Tools",
+    "defaultPrompt": ["Use Character Studio to design and build a stylized low-poly 3D character in Blender."]
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Character Effects"
+  short_description: "Add Blender and browser VFX to 3D characters"
+  default_prompt: "Use $character-effects to add a stylized aura and animation-timed sparks to my 3D character."
