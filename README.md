@@ -23,7 +23,7 @@ codex plugin add character-studio@character-studio
 
 Start a new Codex chat after installation. If the skills are missing, restart the app. If your CLI supports marketplace registration but has no `plugin add` command, register the marketplace, then select **Character Studio — Community** in the app's Plugins Directory and install **Character Studio**.
 
-For a pinned release, register the marketplace with `--ref v0.3.0` instead of `--ref main`.
+For a pinned release, register the marketplace with `--ref v0.3.1` instead of `--ref main`.
 
 The marketplace layout and GitHub registration follow [OpenAI's plugin packaging documentation](https://developers.openai.com/plugins/build/plugins). GitHub distribution is separate from listing in OpenAI's public Plugins Directory.
 
@@ -92,12 +92,13 @@ This registers your checkout under the same community marketplace name. Edit `pl
 
 ## Validation
 
-Version 0.3.0 was tested on Windows with Blender 4.5.14 LTS and Three.js 0.186.1:
+Version 0.3.1 was tested on Windows with Blender 4.5.14 LTS and Three.js 0.186.1:
 
 - Both skills passed Codex's skill validator.
 - Robot GLB: 1,016 triangles, 16 bones, Idle/Walk/Run/Jump/Roll; zero Khronos glTF Validator errors or warnings.
 - Fox GLB: 1,184 triangles, 19 bones, Idle/Walk/Run/Jump; zero Khronos glTF Validator errors or warnings. Dog, cat and static-cat generation were also exercised.
 - New animation checks covered finite skinned vertices, loop boundaries, faster Run cadence, Jump lift/landing, full Roll rotation, ground clearance and one-shot holding. Both GLBs were rendered in headless Edge at desktop/mobile sizes with zero console errors.
+- The 0.3.1 gait regression checks both knees, leading ankles and foot pitch at 65 samples per side in Walk/Run. It rejects the 0.3.0 hyperextended gait and passes the corrected animation.
 - The unchanged effects workflow was previously checked with Blender aura/sparks/fire/smoke renders, runtime lifecycle/cap/anchor/cue tests, and headless Edge rendering with reduced motion.
 
 This validation covers the supplied starters. Review and test each new character in its destination runtime. Walk/Run have no foot/paw locking, the starters do not auto-rig organic meshes, and the Python GLB inspector is not a complete glTF validator.

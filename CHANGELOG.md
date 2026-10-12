@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+- Corrected robot Run/Walk knee flexion: the recovering leg folds backward and the leading leg extends with a small positive knee bend.
+- Added ankle counter-rotation to keep the forward foot readable instead of turning its sole toward the camera.
+- Updated the motion preview and checked both legs throughout the gait cycle.
+
 ## 0.3.0
 
 - Robot starter now includes Run, Jump and Roll alongside Idle and Walk.

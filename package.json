@@ -1,0 +1,8 @@
+{
+  "name": "character-studio-maintenance",
+  "version": "0.3.1",
+  "private": true,
+  "type": "module",
+  "scripts": {"test:gait": "node tests/check_robot_gait.mjs"},
+  "devDependencies": {"three": "0.186.1"}
+}
