@@ -1,4 +1,4 @@
 interface:
   display_name: "Character Studio"
   short_description: "Build low-poly characters through editable stages"
-  default_prompt: "Use $character-studio to build a low-poly Blender character from my reference, starting with a bald T-pose body and reviewing outfit, footwear, face, hair and animation stages."
+  default_prompt: "Use $character-studio to design a character in our own faceted style inspired by my reference, starting with a reusable bald T-pose base and testing its joints before clothing."

@@ -8,7 +8,7 @@ import re
 root = Path(__file__).resolve().parent.parent
 plugin = root / 'plugins/character-studio'
 allowed_imports = {'argparse', 'json', 'math', 'pathlib', 're', 'sys', 'types', 'struct',
-                   'bpy', 'bmesh', 'mathutils', 'build_robot', 'lowpoly_geometry', 'PIL', 'random'}
+                   'bpy', 'bmesh', 'mathutils', 'build_robot', 'build_stylized_humanoid', 'lowpoly_geometry', 'PIL', 'random'}
 forbidden_calls = {'eval', 'exec', 'compile', '__import__', 'system', 'popen'}
 files = []
 for path in sorted(plugin.rglob('*')):

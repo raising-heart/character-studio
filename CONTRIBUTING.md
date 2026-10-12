@@ -6,7 +6,9 @@ Keep marketplace paths relative to the repository root and keep supporting resou
 
 For script changes, run the affected starter with the supported Blender version or a compatible Three.js project. Inspect actual renders for visual changes. Check exported clip names and bones rather than assuming Blender names remain unchanged. For runtime effects, check bounded allocations, animation timing, attachment offsets, reduced motion and disposal.
 
-For a release, update `plugins/character-studio/.codex-plugin/plugin.json`, update the changelog and install instructions, verify both skills and the marketplace entry, then tag the commit. Retain the MIT license and attribution.
+For a release, update `plugins/character-studio/.codex-plugin/plugin.json`, update the changelog and install instructions, verify all three skills and the marketplace entry, then tag the commit. Retain the MIT license and attribution.
+
+For base-body changes, build balanced/compact/sturdy variants, inspect neutral turnarounds and all joint-study poses, and run `npm run test:base-body -- /absolute/path/to/base.glb`. Check connected/manifold topology, symmetry and weight integrity alongside the actual visual result. The joint-study actions are not gameplay clips. Keep generated mannequins outside Git and distribute them separately from the plugin source.
 
 For staged humanoid changes, generate a reference-guided study and a second set of proportions, inspect checkpoints and final motion, and run `npm run test:humanoid -- /absolute/path/to/final.glb`. Check part edits preserve unrelated geometry/actions and that embedded scripts stay disabled when loading checkpoints. Run `python tests/audit_plugin.py` and review imports, filesystem/network behaviour and package contents. Retain third-party notices when adapting reviewed code.
 

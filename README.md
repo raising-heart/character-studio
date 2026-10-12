@@ -1,12 +1,16 @@
 # Character Studio for Codex
 
-Build stylized low-poly Blender characters through editable body, outfit, footwear, face and hair stages, then add motion/effects and prepare GLB assets for browser games.
+Start stylized low-poly Blender characters with a reusable T-pose mannequin. Review its proportions and joints, then fit clothing, footwear, face, hair and motion for browser-game GLB delivery.
 
-Character Studio is a community plugin with two Codex skills. It is inspired by Game Studio's design → implementation → asset pipeline → visual review workflow. It is independently authored and is not an official OpenAI or Blender Foundation plugin.
+Character Studio is a community plugin with three Codex skills. It is inspired by Game Studio's design → implementation → asset pipeline → visual review workflow. It is independently authored and is not an official OpenAI or Blender Foundation plugin.
+
+![Actual T-pose base studies: Balanced, Compact and Sturdy](docs/images/base-body-preview.png)
+
+The new base family uses connected faceted geometry with a large head, short neck, broad torso and substantial limbs. Balanced is the starting preset; Compact and Sturdy offer different proportions. References can inspire characters in this house style. The mannequin is the first phase: clothing, face, hair and gameplay motion still need fitting and review.
 
 ![Blender effects previews: aura, sparks, fire and smoke](docs/images/effects-preview.png)
 
-![Staged humanoid: bald body, outfit, hair/face and actual GLB motion](docs/images/staged-humanoid-preview.png)
+![Legacy 0.5 humanoid study: body, outfit, hair/face and GLB motion](docs/images/staged-humanoid-preview.png)
 
 ## Install
 
@@ -25,11 +29,15 @@ codex plugin add character-studio@character-studio
 
 Start a new Codex chat after installation. If the skills are missing, restart the app. If your CLI supports marketplace registration but has no `plugin add` command, register the marketplace, then select **Character Studio — Community** in the app's Plugins Directory and install **Character Studio**.
 
-For a pinned release, register the marketplace with `--ref v0.5.0` instead of `--ref main`.
+For a pinned release, register the marketplace with `--ref v0.6.0` instead of `--ref main`.
 
 The marketplace layout and GitHub registration follow [OpenAI's plugin packaging documentation](https://developers.openai.com/plugins/build/plugins). GitHub distribution is separate from listing in OpenAI's public Plugins Directory.
 
 ## Use it
+
+Start with the base body:
+
+> Use $character-base-body to build a Balanced mannequin in our own faceted low-poly style. Keep it bald and in T-pose. Inspect front, side, back and three-quarter views and test both shoulders, elbows, knees, hips and torso twist. Deliver the reusable .blend, GLB and joint-study previews before adding clothing.
 
 Create a character:
 
@@ -49,16 +57,17 @@ Be specific about your character's look, intended camera distance, triangle budg
 
 Attach the reference in a Codex chat and ask:
 
-> Use Character Studio to match this image as a blocky low-poly character. Start with a bald T-pose body, then build clothing, footwear, face and hair as editable parts. Estimate difficulty, inspect stage previews and fix visible issues as you continue. Add Run, Jump and Roll and test the dressed character and exported GLB. Deliver checkpoints, reference comparisons and motion previews.
+> Use Character Studio to design our own character inspired by this reference, in the plugin's faceted style. Start with the Balanced bald T-pose mannequin and review its form and joints. Use the image for identity, palette, clothing and hair cues. Fit later parts to the chosen body, add Run/Jump/Roll and test the final GLB. Deliver editable checkpoints and actual previews.
 
-Staged humanoid construction is the default for suitable stylized characters. The executable starter supports adjustable proportions, jacket/tunic, boots, mesh eyes/brows/mouth and short/braided/bald hair. Each stage has an editable `.blend`, GLB, report and previews. Robot-base remains available for mechanical designs or requested rig prototypes; animals use their own rig. Unsupported forms need task-specific modelling. Difficulty is a subjective effort estimate with reasons, not a success probability or image-match score.
+The default humanoid foundation is [Character Base Body](plugins/character-studio/skills/character-base-body/SKILL.md), with one connected closed surface and an optional 16-bone rig. Its five study actions test joints; they are not gameplay clips. A faithful reconstruction brief can override the house-style interpretation. Robot-base remains available for mechanical designs; animals use their own rig. Unsupported forms need task-specific modelling. Difficulty is a subjective effort estimate, not a likeness score or success probability.
 
-The humanoid has a T-pose skeleton, simple blended weights and neutral-pose-aware Idle/Walk/Run/Jump/Roll. A boot/hair/outfit/face checkpoint edit can preserve unrelated parts and actions. Body proportion changes require a coherent fresh build. The motions are editable prototypes without foot locking or cloth/hair physics; review every final character. See [staged construction](plugins/character-studio/skills/character-studio/references/staged-construction.md), [reference comparisons](plugins/character-studio/skills/character-studio/references/reference-comparison.md) and [build paths](plugins/character-studio/skills/character-studio/references/reference-adaptation.md).
+The legacy 0.5 dressed starter remains available for compatible existing assets, with jacket/tunic, boots, mesh face, hair, selective edits and Idle/Walk/Run/Jump/Roll. Its geometry and clothing do not directly fit the new base. New body proportions require coherent rig/weight/costume updates. See [base construction](plugins/character-studio/skills/character-base-body/references/base-body-construction.md), [legacy staged construction](plugins/character-studio/skills/character-studio/references/staged-construction.md) and [build paths](plugins/character-studio/skills/character-studio/references/reference-adaptation.md).
 
 ## Included workflows
 
 | Skill | Capabilities |
 | --- | --- |
+| `$character-base-body` | Reusable connected T-pose mannequin, balanced/compact/sturdy proportions, plain turnarounds, rig/weight checks and five joint studies before character detail |
 | `$character-studio` | Brief, silhouette and proportions, Blender modelling/materials, optional rigging and animation, GLB export, budget checks and visual review |
 | `$character-effects` | Blender mesh-effect previews; Three.js sparks, fire/smoke, dust and magic bursts; bone-attached emitters, auras, simple fading trails, animation cues, bounded particle pools, reduced motion and cleanup |
 
@@ -106,11 +115,13 @@ This registers your checkout under the same community marketplace name. Edit `pl
 
 ## Validation
 
+Version 0.6.0 generated and reviewed all three base-body variants with Blender 4.5.14 LTS. Each has one connected closed body, 434 source vertices, 864 triangles and an optional 16-bone rig. Source topology checks report one component, zero nonmanifold edges/zero-area faces and Euler characteristic 2. Exported skin checks verify rest symmetry, normalised weights, level T-pose arms and observable shoulder/elbow/knee/hip/twist studies without severe edge collapse/stretch. All three GLBs have zero Khronos errors/warnings. Balanced was rendered in 24 actual GLB browser views plus mobile with no errors or external requests. Static output, invalid JSON settings, overwrite refusal and the fresh-process guard were exercised. The plain body and joint studies still require visual judgement; this validates a mannequin foundation, not a finished costume or production character.
+
 Version 0.5.0 was checked with Blender 4.5.14 LTS and Three.js 0.186.1. The staged reference study has 3,950 triangles, six meshes, 16 bones and five clips; a second proportion/style variant has 3,094 triangles. Checks cover T-pose binding, both arm/leg chains, finite skinned vertices, ground clearance, clip endpoints, Jump lift, full Roll and one-shot holding. Browser tests cover 75 poses, desktop/mobile rendering and both one-shot completions. Checkpoint tests preserve unrelated geometry, a manual face edit and animation while actually changing the boots. Static output, invalid settings and overwrite/autoexec protections were exercised. Both final animated GLBs pass Khronos validation with zero errors or warnings.
 
 The original robot/animal and effects pipelines retain their earlier validation; the robot/quadruped generators are unchanged, and the effects loader now explicitly disables embedded scripts. Earlier checks include:
 
-- Both skills passed Codex's skill validator.
+- All three skills passed Codex's skill validator.
 - Robot GLB: 1,016 triangles, 16 bones, Idle/Walk/Run/Jump/Roll; zero Khronos glTF Validator errors or warnings.
 - Fox GLB: 1,184 triangles, 19 bones, Idle/Walk/Run/Jump; zero Khronos glTF Validator errors or warnings. Dog, cat and static-cat generation were also exercised.
 - New animation checks covered finite skinned vertices, loop boundaries, faster Run cadence, Jump lift/landing, full Roll rotation, ground clearance and one-shot holding. Both GLBs were rendered in headless Edge at desktop/mobile sizes with zero console errors.

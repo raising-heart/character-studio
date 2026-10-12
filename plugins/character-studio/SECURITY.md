@@ -1,5 +1,11 @@
 # Security review and execution scope
 
+## 0.6.0 base-body addition
+
+The connected mannequin builder is newly authored local geometry code. It reuses reviewed adjacent rig/export utilities, accepts a closed JSON schema and requires a dedicated factory-startup Blender process. It does not load user checkpoints, download source meshes, execute shell commands or install services. Generated Blender assets are separate deliverables; the shipped plugin contains the reproducible source and JSON preset, not binary assets or scripts hidden inside `.blend` files.
+
+Repeat the package audit for this version and inspect the helper's imports and file writes. Base-body checks cover static generation, invalid settings, overwrite refusal, connected manifold geometry, symmetry, normalised weights and observable joint-study poses. The existing checkpoint-loader protections are unchanged. This review does not turn Blender into a sandbox or certify arbitrary edited code/assets.
+
 ## 0.5.0 review
 
 Reviewed the shipped Python, PowerShell and Three.js helpers, manifest, settings and adapted upstream sources. The new code includes a small reviewed MIT geometry adaptation and rewritten stage/form-review guidance. Full upstream plugins, MCP servers, installers and remote generation clients are excluded. Sources and pinned revisions are recorded in [third-party notices](THIRD_PARTY_NOTICES.md).
