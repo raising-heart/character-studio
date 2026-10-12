@@ -196,8 +196,15 @@ def animate(rig, height):
                 rig.pose.bones['Spine'].rotation_euler.x = .12 if running else 0
                 for direction, side in ((1, 'L'), (-1, 'R')):
                     swing = direction * math.sin(phase)
-                    rig.pose.bones['UpperLeg.' + side].rotation_euler.x = (.70 if running else .40) * swing
-                    rig.pose.bones['LowerLeg.' + side].rotation_euler.x = -(1.05 if running else .48) * max(0, -swing)
+                    hip = (.70 if running else .40) * swing
+                    # These down-facing leg bones flex the knee backward at positive local X.
+                    # Recover the trailing heel; extend the leading leg without hyperextension.
+                    knee = (.12 if running else .06) + (.95 if running else .42) * max(0, swing)
+                    rig.pose.bones['UpperLeg.' + side].rotation_euler.x = hip
+                    rig.pose.bones['LowerLeg.' + side].rotation_euler.x = knee
+                    # The forward-facing foot bone has the opposite local X axis.
+                    # Counter the shin pitch, retaining a small toe-down recovery pose.
+                    rig.pose.bones['Foot.' + side].rotation_euler.x = hip + knee - (.25 if running else .10) * max(0, swing)
                     rig.pose.bones['UpperArm.' + side].rotation_euler.x = -(.65 if running else .28) * swing
                     rig.pose.bones['LowerArm.' + side].rotation_euler.x = -.70 if running else -.10
             elif name == 'Jump':
