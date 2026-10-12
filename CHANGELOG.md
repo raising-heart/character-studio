@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0
+
+- Added an image-reference workflow with Robot-base and Custom build paths and optional blockout comparisons.
+- Added subjective difficulty/effort estimates with reasons and explicit reference assumptions.
+- Added instructions for fitting the rig, updating weights, transferring/repairing clips and testing the final character separately from the donor robot.
+- Model and animation starter scripts are unchanged from 0.3.1; this release extends the Codex workflow.
+
 ## 0.3.1
 
 - Corrected robot Run/Walk knee flexion: the recovering leg folds backward and the leading leg extends with a small positive knee bend.

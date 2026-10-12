@@ -23,7 +23,7 @@ codex plugin add character-studio@character-studio
 
 Start a new Codex chat after installation. If the skills are missing, restart the app. If your CLI supports marketplace registration but has no `plugin add` command, register the marketplace, then select **Character Studio — Community** in the app's Plugins Directory and install **Character Studio**.
 
-For a pinned release, register the marketplace with `--ref v0.3.1` instead of `--ref main`.
+For a pinned release, register the marketplace with `--ref v0.4.0` instead of `--ref main`.
 
 The marketplace layout and GitHub registration follow [OpenAI's plugin packaging documentation](https://developers.openai.com/plugins/build/plugins). GitHub distribution is separate from listing in OpenAI's public Plugins Directory.
 
@@ -42,6 +42,16 @@ Create an animal:
 > Use $character-studio to make a stylized low-poly fox in Blender, with a readable tail and Idle, Walk, Run and Jump animations. Deliver the editable .blend, GLB, turnarounds and a runtime animation preview.
 
 Be specific about your character's look, intended camera distance, triangle budget, required clips, and target game engine. These are workflows and starter scripts: custom character design still needs iteration and visual review.
+
+### Match an image reference
+
+Attach the reference in a Codex chat and ask:
+
+> Use Character Studio to match this image as a stylized low-poly character. Explain Robot-base and Custom, recommend a path, and estimate difficulty from 0 easy to 100 hard. Adapt the geometry and rig, reuse or repair Idle/Walk/Run/Jump/Roll as appropriate, and test every requested animation on the final character and its GLB. Deliver reference comparisons and motion previews.
+
+Robot-base is the automatic starting point for a compatible biped prototype when you have not chosen another path. Custom is recommended when anatomy or continuous surfaces need a tailored model/rig. You can explicitly choose either path, or ask for small blockouts of both before deciding. Difficulty is a subjective effort estimate with reasons, not a success probability or image-match score.
+
+The workflow tests the baseline robot first for animated adaptation, then retests the changed character. Inherited clips may need repaired strides, weights, ground contact or roll clearance. The supplied motions are editable prototypes; good motion on the robot does not guarantee good motion on a differently shaped character. See [reference adaptation](plugins/character-studio/skills/character-studio/references/reference-adaptation.md).
 
 ## Included workflows
 
@@ -92,7 +102,7 @@ This registers your checkout under the same community marketplace name. Edit `pl
 
 ## Validation
 
-Version 0.3.1 was tested on Windows with Blender 4.5.14 LTS and Three.js 0.186.1:
+Version 0.4.0 adds workflow instructions, skill metadata and documentation. Both skills and package links were validated, and GitHub installation was checked. The model/animation/effects helpers are unchanged from 0.3.1, whose validation used Windows, Blender 4.5.14 LTS and Three.js 0.186.1:
 
 - Both skills passed Codex's skill validator.
 - Robot GLB: 1,016 triangles, 16 bones, Idle/Walk/Run/Jump/Roll; zero Khronos glTF Validator errors or warnings.

@@ -1,7 +1,7 @@
 {
   "name": "character-studio",
-  "version": "0.3.1",
-  "description": "Design and animate stylized Blender characters and quadrupeds, export GLB assets, and add character effects.",
+  "version": "0.4.0",
+  "description": "Adapt image references using robot-base or custom Blender character workflows, transfer and test animation, and export GLB assets.",
   "author": {"name": "Personal Codex customization"},
   "license": "MIT",
   "keywords": ["blender", "characters", "low-poly", "rigging", "gltf", "effects", "particles", "threejs", "animals", "animation"],
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Character Studio",
     "shortDescription": "Create stylized low-poly characters in Blender",
-    "longDescription": "Build and animate stylized Blender characters and animals, validate GLB assets, and add effects. Includes a robot with Idle/Walk/Run/Jump/Roll, a fox/dog/cat quadruped starter with Idle/Walk/Run/Jump, Blender effect previews, and bounded Three.js VFX helpers.",
+    "longDescription": "Choose robot-base or custom character creation from a reference, with rough difficulty estimates and animation checks on the adapted character. Includes a robot with Idle/Walk/Run/Jump/Roll, a fox/dog/cat starter, Blender effect previews, and Three.js VFX helpers.",
     "developerName": "Personal Codex customization",
     "category": "Developer Tools",
     "defaultPrompt": ["Use Character Studio to design and build a stylized low-poly 3D character in Blender."]
