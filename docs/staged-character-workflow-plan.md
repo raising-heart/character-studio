@@ -1,6 +1,6 @@
 # Staged low-poly character workflow — implementation plan
 
-Status: proposed implementation for the next Character Studio feature release. The installed 0.4.0 plugin has reference adaptation instructions and robot/quadruped helpers; this plan specifies the new default and the executable support needed to make it practical.
+Status: core implementation delivered in 0.5.0: parameterized T-pose humanoid, editable stages, jacket/tunic, boots, static mesh face, short/braided/bald hair, checkpoint edits and verified core motion. The operational instructions are in the plugin's staged-construction reference. A-pose presets, richer garment modules, facial animation, continuous attachment topology and secondary motion remain extensions; the design below records their intended direction.
 
 ## Intended behaviour
 

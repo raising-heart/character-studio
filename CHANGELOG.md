@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0
+
+- Made staged low-poly humanoid construction the default for suitable character briefs; kept robot and animal routes available.
+- Added an executable humanoid builder with bald T-pose body, outfit, boots, mesh face, short/braided/bald hair, six checkpoints and selective part updates.
+- Added profile/shell geometry tools, bounded JSON settings, neutral-pose-aware Idle/Walk/Run/Jump/Roll and local reference comparisons.
+- Added source provenance, MIT notices, a security audit, overwrite protections and disabled embedded checkpoint scripts; hardened the effects loader too.
+- Tested the orange-braided reference study, a differently proportioned humanoid, static output, checkpoint preservation, invalid inputs, exported motion and browser previews.
+
 ## 0.4.0
 
 - Added an image-reference workflow with Robot-base and Custom build paths and optional blockout comparisons.

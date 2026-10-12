@@ -46,7 +46,7 @@ def main():
         parser.error('input and output .blend must be different files')
     if not args.overwrite and any(path.exists() for path in [blend_path, report_path, *images]):
         parser.error('output exists; choose a new folder or explicitly use --overwrite')
-    bpy.ops.wm.open_mainfile(filepath=str(args.input))
+    bpy.ops.wm.open_mainfile(filepath=str(args.input), use_scripts=False, load_ui=False)
     scene = bpy.context.scene
     candidates = [obj for obj in scene.objects if obj.type == 'ARMATURE' and (not args.rig or obj.name == args.rig)]
     if len(candidates) != 1:

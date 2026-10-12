@@ -1,0 +1,15 @@
+{
+  "height": 1.6,
+  "head_scale": 1.0,
+  "body_width": 1.0,
+  "leg_length": 1.0,
+  "boot_width": 1.0,
+  "hair_style": "braids",
+  "outfit_style": "jacket",
+  "palette": {
+    "skin": "#FFD3AF", "hair": "#F5743C", "outfit": "#3B5541",
+    "trim": "#718267", "shirt": "#E78554", "lower": "#A19170",
+    "boots": "#B9453E", "white": "#FFF8E7", "iris": "#689337",
+    "dark": "#44352E", "gold": "#E9B956"
+  }
+}
