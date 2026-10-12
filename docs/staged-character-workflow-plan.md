@@ -1,6 +1,6 @@
 # Staged low-poly character workflow — implementation plan
 
-Status: 0.6.0 adds a dedicated connected T-pose base-body foundation with balanced/compact/sturdy forms and joint studies. Balanced is the selected starting style. References inspire identity and costume cues within that style unless reconstruction is explicitly requested. The legacy 0.5 dressed starter remains available, but its clothes and motion do not directly fit the new mannequin. Fitting the later costume/face/hair modules, gameplay motion, A-pose presets, facial animation and secondary motion remains subsequent work. The design below records the broader direction.
+Status: 0.6.1 makes Balanced house-style reference interpretation and one pre-detail blockout feedback checkpoint the defaults, with explicit user overrides. 0.6.0 adds a dedicated connected T-pose base-body foundation with balanced/compact/sturdy forms and joint studies. Balanced is the selected starting style. References inspire identity and costume cues within that style unless reconstruction is explicitly requested. The legacy 0.5 dressed starter remains available, but its clothes and motion do not directly fit the new mannequin. Fitting the later costume/face/hair modules, gameplay motion, A-pose presets, facial animation and secondary motion remains subsequent work. The design below records the broader direction.
 
 ## Intended behaviour
 
@@ -8,7 +8,7 @@ A user attaches a character reference and asks Character Studio to build it. For
 
 The visual default is a simple faceted body with a large bevelled head, short neck and substantial limbs, followed by costume geometry and readable face/hair features. Low polygon count does not mean replacing every anatomical part with a cube. Resolve the style intent: the house style translates reference cues into its own body proportions; an explicit reconstruction brief can instead preserve reference ratios. An orc may require a distinct body build.
 
-Keep the robot route available for explicit robots, segmented mechanical designs and fast rig/motion prototypes. Route animals to the quadruped or a tailored species workflow. Preserve existing user assets and explicit build-path choices. Staging does not require the user to approve every step: continue through checks unless they request interactive reviews, a consequential ambiguity needs clarification, or work is blocked.
+Keep the robot route available for explicit robots, segmented mechanical designs and fast rig/motion prototypes. Route animals to the quadruped or a tailored species workflow. Preserve existing user assets and explicit build-path choices. For new reference-based designs, show one body-and-outfit blockout and wait for feedback before facial features or hair detail by default. Users may override this with a request to finish without interactive reviews. Continue other checks autonomously; do not add approval at every stage or expand base-only/edit/animation/effects tasks.
 
 ## Reference analysis and construction brief
 
@@ -97,4 +97,4 @@ Prioritize one dependable stylized humanoid pipeline: configurable proportions, 
 
 Example user prompt after implementation:
 
-> Use Character Studio to build a blocky low-poly character from this reference. Start with a bald T-pose body, then build the outfit, boots, face and hair as editable parts. Preserve the reference proportions, show stage previews, and fix observed issues as you continue. Add Run, Jump and Roll; test the dressed character and exported GLB. Deliver the checkpoints, final .blend and GLB, and a brief validation report.
+> Use Character Studio to build a blocky low-poly character from this reference. Start with a bald T-pose body, then build the outfit, boots, face and hair as editable parts. Interpret the reference in our Balanced house style, show the body-and-outfit blockout for feedback before face and hair, and fix observed issues as you continue. Add Run, Jump and Roll; test the dressed character and exported GLB. Deliver the checkpoints, final .blend and GLB, and a brief validation report.

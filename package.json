@@ -1,6 +1,6 @@
 {
   "name": "character-studio-maintenance",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": true,
   "type": "module",
   "scripts": {"test:gait": "node tests/check_robot_gait.mjs", "test:humanoid": "node tests/check_humanoid.mjs", "test:base-body": "node tests/check_base_body.mjs"},

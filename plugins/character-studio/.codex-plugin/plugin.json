@@ -1,17 +1,32 @@
 {
   "name": "character-studio",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Start stylized humanoids with a reusable connected T-pose base, test its proportions and joints, then fit character details and GLB delivery in Blender.",
-  "author": {"name": "Personal Codex customization"},
+  "author": {
+    "name": "Personal Codex customization"
+  },
   "license": "MIT",
-  "keywords": ["blender", "characters", "low-poly", "rigging", "gltf", "effects", "particles", "threejs", "animals", "animation"],
+  "keywords": [
+    "blender",
+    "characters",
+    "low-poly",
+    "rigging",
+    "gltf",
+    "effects",
+    "particles",
+    "threejs",
+    "animals",
+    "animation"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Character Studio",
     "shortDescription": "Create stylized low-poly characters in Blender",
-    "longDescription": "Includes a dedicated Character Base Body skill for a connected faceted T-pose mannequin, balanced/compact/sturdy proportions and joint-study poses. References can inspire original characters in the chosen house style. Fit clothing, face, hair and gameplay motion after reviewing the base. Retains the legacy dressed starter, robot/animal routes, character effects and local security protections.",
+    "longDescription": "Defaults reference-based humanoids to our Balanced faceted low-poly T-pose base, interpreting identity and costume cues in the house style. Shows a body-and-outfit blockout for feedback before face and hair detail unless instructed otherwise. Explicit styles, reconstruction briefs and existing accepted assets take priority. Includes base-body joint studies, legacy dressed/robot/animal routes, effects and local security protections.",
     "developerName": "Personal Codex customization",
     "category": "Developer Tools",
-    "defaultPrompt": ["Use Character Studio to design and build a stylized low-poly 3D character in Blender."]
+    "defaultPrompt": [
+      "Use Character Studio to interpret my reference in our Balanced low-poly house style and show a body-and-outfit blockout before face and hair."
+    ]
   }
 }

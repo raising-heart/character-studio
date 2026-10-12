@@ -6,7 +6,7 @@ Character Studio is a community plugin with three Codex skills. It is inspired b
 
 ![Actual T-pose base studies: Balanced, Compact and Sturdy](docs/images/base-body-preview.png)
 
-The new base family uses connected faceted geometry with a large head, short neck, broad torso and substantial limbs. Balanced is the starting preset; Compact and Sturdy offer different proportions. References can inspire characters in this house style. The mannequin is the first phase: clothing, face, hair and gameplay motion still need fitting and review.
+The new base family uses connected faceted geometry with a large head, short neck, broad torso and substantial limbs. Balanced is the starting preset; Compact and Sturdy offer different proportions. Reference images default to original interpretations in this house style, using Balanced for suitable humanoids unless instructed otherwise. The mannequin is the first phase: clothing, face, hair and gameplay motion still need fitting and review.
 
 ![Blender effects previews: aura, sparks, fire and smoke](docs/images/effects-preview.png)
 
@@ -29,7 +29,7 @@ codex plugin add character-studio@character-studio
 
 Start a new Codex chat after installation. If the skills are missing, restart the app. If your CLI supports marketplace registration but has no `plugin add` command, register the marketplace, then select **Character Studio — Community** in the app's Plugins Directory and install **Character Studio**.
 
-For a pinned release, register the marketplace with `--ref v0.6.0` instead of `--ref main`.
+For a pinned release, register the marketplace with `--ref v0.6.1` instead of `--ref main`.
 
 The marketplace layout and GitHub registration follow [OpenAI's plugin packaging documentation](https://developers.openai.com/plugins/build/plugins). GitHub distribution is separate from listing in OpenAI's public Plugins Directory.
 
@@ -53,11 +53,13 @@ Create an animal:
 
 Be specific about your character's look, intended camera distance, triangle budget, required clips, and target game engine. These are workflows and starter scripts: custom character design still needs iteration and visual review.
 
-### Match an image reference
+### Interpret an image reference
 
 Attach the reference in a Codex chat and ask:
 
-> Use Character Studio to design our own character inspired by this reference, in the plugin's faceted style. Start with the Balanced bald T-pose mannequin and review its form and joints. Use the image for identity, palette, clothing and hair cues. Fit later parts to the chosen body, add Run/Jump/Roll and test the final GLB. Deliver editable checkpoints and actual previews.
+> Use Character Studio to create a character from this reference.
+
+By default, Codex interprets the reference in our Balanced low-poly house style, checks the plain T-pose body, then shows a simple body-and-outfit blockout for feedback before adding facial features or hair detail. You do not need to repeat the style/proportion choice. Ask for a different style, body build or faithful reconstruction to override it; say "finish without interactive reviews" to skip the feedback pause. Existing accepted assets and base-only, edit, animation or effects requests keep their scope.
 
 The default humanoid foundation is [Character Base Body](plugins/character-studio/skills/character-base-body/SKILL.md), with one connected closed surface and an optional 16-bone rig. Its five study actions test joints; they are not gameplay clips. A faithful reconstruction brief can override the house-style interpretation. Robot-base remains available for mechanical designs; animals use their own rig. Unsupported forms need task-specific modelling. Difficulty is a subjective effort estimate, not a likeness score or success probability.
 
@@ -114,6 +116,8 @@ codex plugin add character-studio@character-studio
 This registers your checkout under the same community marketplace name. Edit `plugins/character-studio`, bump the plugin manifest version for a release, and reinstall. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Validation
+
+Version 0.6.1 changes instructions and metadata only. All three skills, package links/metadata, the security audit and installed resources were checked. The executable helpers and base preset are byte-identical to 0.6.0; its geometry/runtime validation remains applicable. This update does not implement automatic reference conversion or new fitting/motion tools.
 
 Version 0.6.0 generated and reviewed all three base-body variants with Blender 4.5.14 LTS. Each has one connected closed body, 434 source vertices, 864 triangles and an optional 16-bone rig. Source topology checks report one component, zero nonmanifold edges/zero-area faces and Euler characteristic 2. Exported skin checks verify rest symmetry, normalised weights, level T-pose arms and observable shoulder/elbow/knee/hip/twist studies without severe edge collapse/stretch. All three GLBs have zero Khronos errors/warnings. Balanced was rendered in 24 actual GLB browser views plus mobile with no errors or external requests. Static output, invalid JSON settings, overwrite refusal and the fresh-process guard were exercised. The plain body and joint studies still require visual judgement; this validates a mannequin foundation, not a finished costume or production character.
 
