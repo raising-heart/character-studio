@@ -4,16 +4,17 @@ Use a supplied image as design evidence. Inspect it before judging difficulty or
 
 ## Choose a path
 
-Present both paths briefly and recommend one, using the user's intended art style, target camera, current asset and animation needs:
+Choose a path using the user's intended style, body plan, current asset and motion needs. Explain alternatives briefly when relevant:
 
 | Path | Use when | Work required |
 | --- | --- | --- |
-| Robot-base | A biped with compatible joints, especially segmented or angular low-poly designs; fast gameplay prototypes | Generate or open the robot, reshape/replace parts, fit its skeleton, update weights and repair inherited clips |
+| Staged humanoid (default) | Stylized low-poly people and compatible humanoid creatures | Shape a bald neutral-pose body, review it, then construct clothing, footwear, face and hair through editable checkpoints |
+| Robot-base | Explicit robots, mechanical segmentation, or a requested donor/prototype rig | Generate or open the robot, reshape/replace parts, fit its skeleton, update weights and repair inherited clips |
 | Custom | Continuous organic surfaces, substantially different anatomy, or a design poorly served by the robot silhouette | Build tailored geometry and rig; transfer compatible motion or author new clips |
 
 Both paths can use the robot's motion as a reference. Custom does not imply discarding useful animation; Robot-base does not imply keeping visible robot panels, gaps or colours. Bone names alone do not guarantee compatibility. Quadrupeds should use their own starter or a tailored animal rig, never automatically the biped robot.
 
-Honor an explicit path. If none is chosen and the brief clearly fits the robot, state that Robot-base is the default and proceed. Otherwise state the recommended Custom path and proceed. Give users an easy opportunity to redirect. If they ask to compare, make small blockouts or representative posed renders for both paths, explain the differences and let them choose before doing two complete assets. Do not duplicate a full project by default.
+Honor an explicit path. Otherwise use [staged humanoid construction](staged-construction.md) for suitable characters, an animal route for quadrupeds, and Custom for unsupported anatomy. State the assumption and proceed. Robot-like versions of animal references still need animal joints. Give users an easy opportunity to redirect. If they ask to compare, make small blockouts or representative posed renders before doing complete alternatives.
 
 ## Difficulty estimate
 

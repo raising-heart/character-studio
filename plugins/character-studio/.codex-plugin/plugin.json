@@ -1,7 +1,7 @@
 {
   "name": "character-studio",
-  "version": "0.4.0",
-  "description": "Adapt image references using robot-base or custom Blender character workflows, transfer and test animation, and export GLB assets.",
+  "version": "0.5.0",
+  "description": "Build low-poly humanoids in editable body, outfit, footwear, face and hair stages, then test animation and GLB delivery in Blender.",
   "author": {"name": "Personal Codex customization"},
   "license": "MIT",
   "keywords": ["blender", "characters", "low-poly", "rigging", "gltf", "effects", "particles", "threejs", "animals", "animation"],
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Character Studio",
     "shortDescription": "Create stylized low-poly characters in Blender",
-    "longDescription": "Choose robot-base or custom character creation from a reference, with rough difficulty estimates and animation checks on the adapted character. Includes a robot with Idle/Walk/Run/Jump/Roll, a fox/dog/cat starter, Blender effect previews, and Three.js VFX helpers.",
+    "longDescription": "Defaults to staged low-poly humanoid construction from a reference, with a bald T-pose body, clothing, boots, face and hair checkpoints, selective part edits and verified animation. Includes optional robot and fox/dog/cat routes, Blender effects, local reference comparisons and documented security protections.",
     "developerName": "Personal Codex customization",
     "category": "Developer Tools",
     "defaultPrompt": ["Use Character Studio to design and build a stylized low-poly 3D character in Blender."]

@@ -1,10 +1,12 @@
 # Character Studio for Codex
 
-Design stylized low-poly 3D characters and animals in Blender, add animation and effects, and prepare GLB assets for browser games.
+Build stylized low-poly Blender characters through editable body, outfit, footwear, face and hair stages, then add motion/effects and prepare GLB assets for browser games.
 
 Character Studio is a community plugin with two Codex skills. It is inspired by Game Studio's design → implementation → asset pipeline → visual review workflow. It is independently authored and is not an official OpenAI or Blender Foundation plugin.
 
 ![Blender effects previews: aura, sparks, fire and smoke](docs/images/effects-preview.png)
+
+![Staged humanoid: bald body, outfit, hair/face and actual GLB motion](docs/images/staged-humanoid-preview.png)
 
 ## Install
 
@@ -23,7 +25,7 @@ codex plugin add character-studio@character-studio
 
 Start a new Codex chat after installation. If the skills are missing, restart the app. If your CLI supports marketplace registration but has no `plugin add` command, register the marketplace, then select **Character Studio — Community** in the app's Plugins Directory and install **Character Studio**.
 
-For a pinned release, register the marketplace with `--ref v0.4.0` instead of `--ref main`.
+For a pinned release, register the marketplace with `--ref v0.5.0` instead of `--ref main`.
 
 The marketplace layout and GitHub registration follow [OpenAI's plugin packaging documentation](https://developers.openai.com/plugins/build/plugins). GitHub distribution is separate from listing in OpenAI's public Plugins Directory.
 
@@ -47,11 +49,11 @@ Be specific about your character's look, intended camera distance, triangle budg
 
 Attach the reference in a Codex chat and ask:
 
-> Use Character Studio to match this image as a stylized low-poly character. Explain Robot-base and Custom, recommend a path, and estimate difficulty from 0 easy to 100 hard. Adapt the geometry and rig, reuse or repair Idle/Walk/Run/Jump/Roll as appropriate, and test every requested animation on the final character and its GLB. Deliver reference comparisons and motion previews.
+> Use Character Studio to match this image as a blocky low-poly character. Start with a bald T-pose body, then build clothing, footwear, face and hair as editable parts. Estimate difficulty, inspect stage previews and fix visible issues as you continue. Add Run, Jump and Roll and test the dressed character and exported GLB. Deliver checkpoints, reference comparisons and motion previews.
 
-Robot-base is the automatic starting point for a compatible biped prototype when you have not chosen another path. Custom is recommended when anatomy or continuous surfaces need a tailored model/rig. You can explicitly choose either path, or ask for small blockouts of both before deciding. Difficulty is a subjective effort estimate with reasons, not a success probability or image-match score.
+Staged humanoid construction is the default for suitable stylized characters. The executable starter supports adjustable proportions, jacket/tunic, boots, mesh eyes/brows/mouth and short/braided/bald hair. Each stage has an editable `.blend`, GLB, report and previews. Robot-base remains available for mechanical designs or requested rig prototypes; animals use their own rig. Unsupported forms need task-specific modelling. Difficulty is a subjective effort estimate with reasons, not a success probability or image-match score.
 
-The workflow tests the baseline robot first for animated adaptation, then retests the changed character. Inherited clips may need repaired strides, weights, ground contact or roll clearance. The supplied motions are editable prototypes; good motion on the robot does not guarantee good motion on a differently shaped character. See [reference adaptation](plugins/character-studio/skills/character-studio/references/reference-adaptation.md).
+The humanoid has a T-pose skeleton, simple blended weights and neutral-pose-aware Idle/Walk/Run/Jump/Roll. A boot/hair/outfit/face checkpoint edit can preserve unrelated parts and actions. Body proportion changes require a coherent fresh build. The motions are editable prototypes without foot locking or cloth/hair physics; review every final character. See [staged construction](plugins/character-studio/skills/character-studio/references/staged-construction.md), [reference comparisons](plugins/character-studio/skills/character-studio/references/reference-comparison.md) and [build paths](plugins/character-studio/skills/character-studio/references/reference-adaptation.md).
 
 ## Included workflows
 
@@ -80,7 +82,7 @@ Ship this runtime code/config alongside the character GLB. Blender particles, pr
 
 ## Updates and local development
 
-The proposed next character-building default is documented in the [staged low-poly character workflow plan](docs/staged-character-workflow-plan.md). It specifies a modular humanoid builder, part checkpoints and visual release tests; these planned capabilities are not included in 0.4.0.
+The [workflow design](docs/staged-character-workflow-plan.md) records the staged implementation and future extensions.
 
 For an installation tracking `main`, refresh the catalog and install the current plugin version:
 
@@ -104,7 +106,9 @@ This registers your checkout under the same community marketplace name. Edit `pl
 
 ## Validation
 
-Version 0.4.0 adds workflow instructions, skill metadata and documentation. Both skills and package links were validated, and GitHub installation was checked. The model/animation/effects helpers are unchanged from 0.3.1, whose validation used Windows, Blender 4.5.14 LTS and Three.js 0.186.1:
+Version 0.5.0 was checked with Blender 4.5.14 LTS and Three.js 0.186.1. The staged reference study has 3,950 triangles, six meshes, 16 bones and five clips; a second proportion/style variant has 3,094 triangles. Checks cover T-pose binding, both arm/leg chains, finite skinned vertices, ground clearance, clip endpoints, Jump lift, full Roll and one-shot holding. Browser tests cover 75 poses, desktop/mobile rendering and both one-shot completions. Checkpoint tests preserve unrelated geometry, a manual face edit and animation while actually changing the boots. Static output, invalid settings and overwrite/autoexec protections were exercised. Both final animated GLBs pass Khronos validation with zero errors or warnings.
+
+The original robot/animal and effects pipelines retain their earlier validation; the robot/quadruped generators are unchanged, and the effects loader now explicitly disables embedded scripts. Earlier checks include:
 
 - Both skills passed Codex's skill validator.
 - Robot GLB: 1,016 triangles, 16 bones, Idle/Walk/Run/Jump/Roll; zero Khronos glTF Validator errors or warnings.
@@ -113,7 +117,11 @@ Version 0.4.0 adds workflow instructions, skill metadata and documentation. Both
 - The 0.3.1 gait regression checks both knees, leading ankles and foot pitch at 65 samples per side in Walk/Run. It rejects the 0.3.0 hyperextended gait and passes the corrected animation.
 - The unchanged effects workflow was previously checked with Blender aura/sparks/fire/smoke renders, runtime lifecycle/cap/anchor/cue tests, and headless Edge rendering with reduced motion.
 
-This validation covers the supplied starters. Review and test each new character in its destination runtime. Walk/Run have no foot/paw locking, the starters do not auto-rig organic meshes, and the Python GLB inspector is not a complete glTF validator.
+This validation covers the supplied starters, not arbitrary reconstruction. The humanoid face is static, hands are simple mittens, hair is rigid, and body attachment seams/analytic weights need visual review. Review every new character in its destination runtime. The Python GLB inspector is not a complete glTF validator.
+
+## Security and dependencies
+
+The shipped Blender helpers use local files and have no network client, telemetry, credentials, shell execution, install hooks or background service. The new builder uses a bounded JSON schema, refuses accidental overwrites and opens checkpoints with embedded scripts disabled. Optional image comparisons use Python with Pillow; it is not installed automatically. Model generation needs only Blender and bundled scripts. See [security review](plugins/character-studio/SECURITY.md) and [third-party notices](plugins/character-studio/THIRD_PARTY_NOTICES.md). Run `python tests/audit_plugin.py` to repeat static checks; these complement manual review and do not sandbox Blender.
 
 ## License and origin
 
