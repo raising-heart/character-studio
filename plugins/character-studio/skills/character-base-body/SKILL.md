@@ -9,7 +9,7 @@ Create a body that looks intentional while bald and plainly shaded. A T-pose des
 
 ## Style and brief
 
-Resolve the user's style intent. Reference-inspired design translates identity cues into the chosen house style: proportions, silhouette, broad planes, palette and costume language. Exact reconstruction is a separate explicit brief. Do not judge a house-style character by pixel likeness to a source screenshot.
+Default to the Balanced Character Studio house-style mannequin unless the user requests another build/style or supplies an accepted body to preserve. State the assumption and proceed without repeatedly asking for a proportion choice. Reference-inspired design translates identity cues into that style: proportions, silhouette, broad planes, palette and costume language. Exact reconstruction is a separate explicit brief. Do not judge a house-style character by pixel likeness to a source screenshot.
 
 Character Studio's initial base family uses a large bevelled head, short neck, broad shoulder/chest planes, a tapered waist, readable hips, substantial limbs and simplified palms/feet. `balanced`, `compact` and `sturdy` are editable starting shapes, not locked anatomy rules. Preserve an explicit requested style. Unsupported anatomy requires adapting the task copy and rebuilding its rig coherently.
 

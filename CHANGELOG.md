@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.1 — reference interpretation defaults
+
+- Default reference-based humanoids to the Balanced low-poly house style without repeatedly asking users to choose proportions or replication.
+- Add one body-and-outfit blockout feedback checkpoint before facial features and hair detail, unless users request completion without interactive reviews.
+- Preserve explicit styles, builds, reconstruction requests, accepted assets and base-only/edit/animation/effects scope. Keep animals on compatible body and rig routes.
+- Update skill prompts and documentation. Geometry, rigs, animations and executable helpers are unchanged from 0.6.0.
+
 ## 0.6.0 — base-body foundation
 
 - Added Character Base Body, a dedicated skill and local builder for a connected faceted T-pose mannequin before clothing/face/hair work.
