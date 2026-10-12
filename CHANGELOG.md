@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 — base-body foundation
+
+- Added Character Base Body, a dedicated skill and local builder for a connected faceted T-pose mannequin before clothing/face/hair work.
+- Added balanced/compact/sturdy body variants, continuous shoulder/neck/hip/foot surfaces, blended weights and five joint-study poses.
+- Clarified reference-inspired original styling versus faithful reconstruction; references do not automatically define the house-style proportions.
+- Added topology, symmetry, skin/pose and security checks plus actual base-body previews. The base is a style foundation; gameplay motion and fitted costumes remain subsequent work.
+- Preserved the 0.5 dressed starter for compatible existing assets. Its clothing/motion is not a direct fit for the new mannequin.
+
 ## 0.5.0
 
 - Made staged low-poly humanoid construction the default for suitable character briefs; kept robot and animal routes available.

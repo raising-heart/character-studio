@@ -1,7 +1,7 @@
 {
   "name": "character-studio",
-  "version": "0.5.0",
-  "description": "Build low-poly humanoids in editable body, outfit, footwear, face and hair stages, then test animation and GLB delivery in Blender.",
+  "version": "0.6.0",
+  "description": "Start stylized humanoids with a reusable connected T-pose base, test its proportions and joints, then fit character details and GLB delivery in Blender.",
   "author": {"name": "Personal Codex customization"},
   "license": "MIT",
   "keywords": ["blender", "characters", "low-poly", "rigging", "gltf", "effects", "particles", "threejs", "animals", "animation"],
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Character Studio",
     "shortDescription": "Create stylized low-poly characters in Blender",
-    "longDescription": "Defaults to staged low-poly humanoid construction from a reference, with a bald T-pose body, clothing, boots, face and hair checkpoints, selective part edits and verified animation. Includes optional robot and fox/dog/cat routes, Blender effects, local reference comparisons and documented security protections.",
+    "longDescription": "Includes a dedicated Character Base Body skill for a connected faceted T-pose mannequin, balanced/compact/sturdy proportions and joint-study poses. References can inspire original characters in the chosen house style. Fit clothing, face, hair and gameplay motion after reviewing the base. Retains the legacy dressed starter, robot/animal routes, character effects and local security protections.",
     "developerName": "Personal Codex customization",
     "category": "Developer Tools",
     "defaultPrompt": ["Use Character Studio to design and build a stylized low-poly 3D character in Blender."]

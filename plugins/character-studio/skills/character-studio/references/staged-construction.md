@@ -1,6 +1,8 @@
 # Staged low-poly humanoid construction
 
-Default to this route for suitable stylized people/humanoids. Inspect the reference first. Preserve its body/head ratios, clothing shapes and hair outline; a low-poly budget still needs shaped surfaces, not arbitrary boxes. A simple expressive face can carry more detail than the body. Estimate modelling and motion effort separately and identify hidden-view assumptions.
+Start new stylized humanoids with [Character Base Body](../../character-base-body/SKILL.md). Establish the intended house style and review the mannequin before dressing it. References can guide identity, clothing, hair and palette while the body uses the chosen original style; exact reconstruction is an explicit alternative brief.
+
+The executable stages below describe the **legacy 0.5 dressed humanoid starter**. Its clothing, face, hair and motion do not automatically fit the new connected mannequin. Keep it for compatible existing characters or explicit requests. A low-poly budget still needs shaped surfaces and visual review. Estimate modelling and motion effort separately and identify hidden-view assumptions.
 
 ## Stages and feedback
 

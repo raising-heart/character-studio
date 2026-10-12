@@ -1,12 +1,12 @@
 # Staged low-poly character workflow — implementation plan
 
-Status: core implementation delivered in 0.5.0: parameterized T-pose humanoid, editable stages, jacket/tunic, boots, static mesh face, short/braided/bald hair, checkpoint edits and verified core motion. The operational instructions are in the plugin's staged-construction reference. A-pose presets, richer garment modules, facial animation, continuous attachment topology and secondary motion remain extensions; the design below records their intended direction.
+Status: 0.6.0 adds a dedicated connected T-pose base-body foundation with balanced/compact/sturdy forms and joint studies. Balanced is the selected starting style. References inspire identity and costume cues within that style unless reconstruction is explicitly requested. The legacy 0.5 dressed starter remains available, but its clothes and motion do not directly fit the new mannequin. Fitting the later costume/face/hair modules, gameplay motion, A-pose presets, facial animation and secondary motion remains subsequent work. The design below records the broader direction.
 
 ## Intended behaviour
 
 A user attaches a character reference and asks Character Studio to build it. For a stylized humanoid, Codex starts with a shaped low-poly body in a neutral pose, then constructs editable clothing, footwear, facial features and hair. It inspects actual Blender renders at each useful checkpoint, repairs observed problems, and validates requested animation on the dressed character and exported GLB.
 
-The visual default is simple faceted body and costume geometry, with more attention given to the face and silhouette-defining features. Low polygon count does not mean replacing every anatomical part with a cube. Preserve the reference's proportions: a large-headed reference suggests a large-headed model; an orc need not inherit those proportions.
+The visual default is a simple faceted body with a large bevelled head, short neck and substantial limbs, followed by costume geometry and readable face/hair features. Low polygon count does not mean replacing every anatomical part with a cube. Resolve the style intent: the house style translates reference cues into its own body proportions; an explicit reconstruction brief can instead preserve reference ratios. An orc may require a distinct body build.
 
 Keep the robot route available for explicit robots, segmented mechanical designs and fast rig/motion prototypes. Route animals to the quadruped or a tailored species workflow. Preserve existing user assets and explicit build-path choices. Staging does not require the user to approve every step: continue through checks unless they request interactive reviews, a consequential ambiguity needs clarification, or work is blocked.
 
