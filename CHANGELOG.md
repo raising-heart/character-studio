@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- Robot starter now includes Run, Jump and Roll alongside Idle and Walk.
+- Added one-shot/loop metadata and guidance for integrating visual root offsets with game physics.
+- Added a segmented fox/dog/cat quadruped starter with Idle, Walk, Run and Jump.
+- Added animal body-plan, rigging and gait guidance.
+
 ## 0.2.0
 
 - Added the Character Effects skill and Blender aura/sparks/fire/smoke preview helper.

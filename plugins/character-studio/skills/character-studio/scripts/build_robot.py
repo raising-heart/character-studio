@@ -7,16 +7,19 @@ import re
 import sys
 
 import bpy
-from mathutils import Vector
+from mathutils import Matrix, Vector
 
 
-def arguments():
-    parser = argparse.ArgumentParser(description=__doc__)
+def arguments(default_name='Scout', default_height=1.8, default_body='#247D88', default_accent='#F1B646',
+              species_choices=None, description=None):
+    parser = argparse.ArgumentParser(description=description or __doc__)
+    if species_choices:
+        parser.add_argument('--species', choices=species_choices, default=species_choices[0])
     parser.add_argument('--output', required=True, type=Path)
-    parser.add_argument('--name', default='Scout')
-    parser.add_argument('--height', type=float, default=1.8)
-    parser.add_argument('--body-color', default='#247D88')
-    parser.add_argument('--accent-color', default='#F1B646')
+    parser.add_argument('--name', default=default_name)
+    parser.add_argument('--height', type=float, default=default_height)
+    parser.add_argument('--body-color', default=default_body)
+    parser.add_argument('--accent-color', default=default_accent)
     parser.add_argument('--no-rig', action='store_true')
     parser.add_argument('--no-render', action='store_true')
     parser.add_argument('--render-size', type=int, default=512)
@@ -161,28 +164,69 @@ def build_rig(options, collection, meshes):
     return rig
 
 
+def ground_clearance(rig, margin=0):
+    """Lift a reference rig's Z-aligned Root enough to clear evaluated mesh bounds."""
+    bpy.context.view_layer.update()
+    graph = bpy.context.evaluated_depsgraph_get()
+    skinned = [obj.evaluated_get(graph) for obj in bpy.context.scene.objects if obj.type == 'MESH'
+               and any(mod.type == 'ARMATURE' and mod.object == rig for mod in obj.modifiers)]
+    low = min((obj.matrix_world @ Vector(corner)).z for obj in skinned for corner in obj.bound_box)
+    rig.pose.bones['Root'].location.y += max(0, margin - low)
+
+
 def animate(rig, height):
     rig.animation_data_create()
     clips = {}
-    for name, end_frame in (('Idle', 49), ('Walk', 25)):
+    for name, end_frame in (('Idle', 49), ('Walk', 25), ('Run', 17), ('Jump', 25), ('Roll', 25)):
         action = bpy.data.actions.new(name)
         rig.animation_data.action = action
-        for frame in range(1, end_frame + 1, 2):
+        for frame in range(1, end_frame + 1):
+            t = (frame - 1) / (end_frame - 1)
             phase = 2 * math.pi * (frame - 1) / (end_frame - 1)
             for bone in rig.pose.bones:
                 bone.location = (0, 0, 0)
                 bone.rotation_euler = (0, 0, 0)
             if name == 'Idle':
-                rig.pose.bones['Pelvis'].location.z = .006 * height * (1 - math.cos(phase))
+                rig.pose.bones['Pelvis'].location.y = .006 * height * (1 - math.cos(phase))
                 rig.pose.bones['Spine'].rotation_euler.y = .025 * math.sin(phase)
                 rig.pose.bones['Head'].rotation_euler.z = .035 * math.sin(phase)
-            else:
+            elif name in ('Walk', 'Run'):
+                running = name == 'Run'
+                rig.pose.bones['Pelvis'].location.y = (.025 if running else .008) * height * (1 - math.cos(phase * 2))
+                rig.pose.bones['Spine'].rotation_euler.x = .12 if running else 0
                 for direction, side in ((1, 'L'), (-1, 'R')):
                     swing = direction * math.sin(phase)
-                    rig.pose.bones['UpperLeg.' + side].rotation_euler.x = .40 * swing
-                    rig.pose.bones['LowerLeg.' + side].rotation_euler.x = -.48 * max(0, -swing)
-                    rig.pose.bones['UpperArm.' + side].rotation_euler.x = -.28 * swing
-                    rig.pose.bones['LowerArm.' + side].rotation_euler.x = -.10
+                    rig.pose.bones['UpperLeg.' + side].rotation_euler.x = (.70 if running else .40) * swing
+                    rig.pose.bones['LowerLeg.' + side].rotation_euler.x = -(1.05 if running else .48) * max(0, -swing)
+                    rig.pose.bones['UpperArm.' + side].rotation_euler.x = -(.65 if running else .28) * swing
+                    rig.pose.bones['LowerArm.' + side].rotation_euler.x = -.70 if running else -.10
+            elif name == 'Jump':
+                lift = math.sin(math.pi * (t - .2) / .6) if .2 < t < .8 else 0
+                crouch = math.sin(math.pi * t / .2) if t < .2 else (math.sin(math.pi * (t - .8) / .2) if t > .8 else 0)
+                rig.pose.bones['Root'].location.y = .32 * height * lift
+                rig.pose.bones['Pelvis'].location.y = -.07 * height * crouch
+                for side in ('L', 'R'):
+                    rig.pose.bones['UpperLeg.' + side].rotation_euler.x = .35 * crouch + .22 * lift
+                    rig.pose.bones['LowerLeg.' + side].rotation_euler.x = -.7 * crouch - .45 * lift
+                    rig.pose.bones['UpperArm.' + side].rotation_euler.x = -.8 * lift + .25 * crouch
+                    rig.pose.bones['LowerArm.' + side].rotation_euler.x = -.4 * lift
+            else:
+                tuck = math.sin(math.pi * t) ** .5
+                angle = 2 * math.pi * t
+                root = rig.pose.bones['Root']
+                root.rotation_euler.x = angle
+                # Rotate about a body-height pivot, rather than the ground origin.
+                pivot = Vector((0, 0, .55 * height))
+                delta = pivot - Matrix.Rotation(angle, 3, 'X') @ pivot
+                root.location = rig.data.bones['Root'].matrix_local.to_3x3().inverted() @ delta
+                rig.pose.bones['Spine'].rotation_euler.x = .35 * tuck
+                for side in ('L', 'R'):
+                    rig.pose.bones['UpperLeg.' + side].rotation_euler.x = 1.05 * tuck
+                    rig.pose.bones['LowerLeg.' + side].rotation_euler.x = -1.5 * tuck
+                    rig.pose.bones['UpperArm.' + side].rotation_euler.x = -.9 * tuck
+                    rig.pose.bones['LowerArm.' + side].rotation_euler.x = -1.1 * tuck
+            if name != 'Idle':
+                ground_clearance(rig, margin=.001 * height)
             for bone in rig.pose.bones:
                 bone.keyframe_insert(data_path='rotation_euler', frame=frame, group=bone.name)
                 bone.keyframe_insert(data_path='location', frame=frame, group=bone.name)
@@ -197,7 +241,10 @@ def animate(rig, height):
         clips[name] = (action, slot, end_frame)
     rig.animation_data.action = clips['Idle'][0]
     rig.animation_data.action_slot = clips['Idle'][1]
-    return {name: {'first_frame': 1, 'last_frame': value[2], 'fps': 24, 'root_motion': False}
+    return {name: {'first_frame': 1, 'last_frame': value[2], 'fps': 24, 'root_motion': False,
+                   'loop': name in ('Idle', 'Walk', 'Run'),
+                   'visual_root_offsets': name != 'Idle',
+                   'preview_jump_height_metres': .32 * height if name == 'Jump' else 0}
             for name, value in clips.items()}
 
 
@@ -217,7 +264,8 @@ def staging(options):
     for name, position, energy, size in (
             ('Key', (3, -4, 5), 650, 4), ('Fill', (-4, -2, 3), 400, 5), ('Rim', (1, 4, 4), 700, 3)):
         data = bpy.data.lights.new(name, 'AREA')
-        data.energy, data.size = energy, size
+        lighting_scale = options.height / 1.8
+        data.energy, data.size = energy * lighting_scale ** 2, size * lighting_scale
         light = bpy.data.objects.new(name, data)
         stage.objects.link(light)
         light.location = Vector(position) * (options.height / 1.8)
@@ -225,7 +273,8 @@ def staging(options):
     data = bpy.data.cameras.new('CharacterPreview')
     camera = bpy.data.objects.new('CharacterPreview', data)
     stage.objects.link(camera)
-    data.type, data.ortho_scale = 'ORTHO', options.height * 1.25
+    span = getattr(options, 'preview_span', options.height)
+    data.type, data.ortho_scale = 'ORTHO', span * 1.25
     target = Vector((0, 0, options.height * .48))
     camera.location = target + Vector((4, -6, 2.2)) * options.height
     camera.rotation_euler = (target - camera.location).to_track_quat('-Z', 'Y').to_euler()
@@ -245,8 +294,7 @@ def staging(options):
     return camera
 
 
-def main():
-    options = arguments()
+def generate(options, mesh_builder, rig_builder, animator, limitations, rig_type='rigid segmented'):
     options.output.mkdir(parents=True, exist_ok=True)
     bpy.context.preferences.filepaths.save_version = 0
     bpy.ops.object.select_all(action='SELECT')
@@ -257,10 +305,10 @@ def main():
     scene.frame_start, scene.frame_end = 1, 49
     character = bpy.data.collections.new(options.name)
     scene.collection.children.link(character)
-    meshes, mats = build_meshes(options, character)
+    meshes, mats = mesh_builder(options, character)
     bpy.ops.object.select_all(action='DESELECT')
-    rig = None if options.no_rig else build_rig(options, character, meshes)
-    clips = {} if rig is None else animate(rig, options.height)
+    rig = None if options.no_rig else rig_builder(options, character, meshes)
+    clips = {} if rig is None else animator(rig, options.height)
     scene.frame_set(1)
     camera = staging(options)
     outputs = {'blend': str(options.output / (options.name + '.blend')),
@@ -302,15 +350,21 @@ def main():
               'character_height_metres': options.height, 'mesh_objects': len(meshes),
               'evaluated_triangles': triangle_count, 'materials': list(mats),
               'bone_count': len(rig.data.bones) if rig else 0, 'clips': clips,
-              'rig_type': 'rigid segmented' if rig else 'static',
+              'rig_type': rig_type if rig else 'static',
               'outputs': outputs, 'previews': previews,
               'glb_bytes': Path(outputs['glb']).stat().st_size,
-              'limitations': ['Rigid robot reference; not an organic auto-rigger.',
-                              'Walk is a basic in-place prototype clip; foot locking is not implemented.',
-                              'Review the GLB visually in the destination runtime.']}
+              'limitations': limitations}
     report_path = options.output / (options.name + '-report.json')
     report_path.write_text(json.dumps(report, indent=2), encoding='utf-8')
     print('CHARACTER_STUDIO_RESULT ' + json.dumps(report))
+
+
+def main():
+    generate(arguments(), build_meshes, build_rig, animate,
+             ['Rigid robot reference; not an organic auto-rigger.',
+              'Walk/Run are in-place prototypes without foot locking.',
+              'Jump/Roll are one-shot visual clips; Jump includes baked vertical lift.',
+              'Game controls, collisions and horizontal movement are separate runtime work.'])
 
 
 if __name__ == '__main__':
