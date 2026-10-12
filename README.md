@@ -80,6 +80,8 @@ Ship this runtime code/config alongside the character GLB. Blender particles, pr
 
 ## Updates and local development
 
+The proposed next character-building default is documented in the [staged low-poly character workflow plan](docs/staged-character-workflow-plan.md). It specifies a modular humanoid builder, part checkpoints and visual release tests; these planned capabilities are not included in 0.4.0.
+
 For an installation tracking `main`, refresh the catalog and install the current plugin version:
 
 ```sh
